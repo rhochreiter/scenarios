@@ -1,0 +1,13 @@
+Package: scenarios
+Type: Package
+Title: Scenario-based Stochastic Optimization
+Version: 0.1-0
+Date: 2013-09-24
+Author: Ronald Hochreiter <ron@hochreiter.net>
+Maintainer: Ronald Hochreiter <ron@hochreiter.net>
+Description: Scenario-based Stochastic Optimization
+Depends:
+  R (>= 3.0),
+  quantmod
+License: GPL-3
+URL: http://www.github.com/rhochreiter/scenarios/
