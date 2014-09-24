@@ -1,0 +1,4 @@
+export("add.tree.matrix")
+export("nst.b")
+export("plot.scenario.tree")
+export("print.scenario.tree")
