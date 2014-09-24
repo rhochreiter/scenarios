@@ -19,9 +19,7 @@
   \url{http://finance.yahoo.com/}
 }
 
-\references{
-  \references{\url{http://www.github.com/rhochreiter/scenarios/}
-}
+\references{\url{http://www.github.com/rhochreiter/scenarios/}}
 
 \examples{
   data(sp500)
