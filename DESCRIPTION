@@ -2,7 +2,7 @@ Package: scenarios
 Type: Package
 Title: Scenario-based Stochastic Optimization
 Version: 0.1-0
-Date: 2013-09-24
+Date: 2013-09-25
 Author: Ronald Hochreiter <ron@hochreiter.net>
 Maintainer: Ronald Hochreiter <ron@hochreiter.net>
 Description: Scenario-based Stochastic Optimization
