@@ -1,4 +1,2 @@
-scenarios
-=========
+# Scenario Generation for Stochastic Programming
 
-Scenario Generation
