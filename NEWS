@@ -1,0 +1,11 @@
+NEWS
+----
+
+* 2016-11-14: Version 0.1-1 
+
+- added preliminary version of single-stage scenario reduction
+- added preliminary version of facility location multi-stage (from 2013)
+
+* 2013-09-25: Version 0.1-0 
+
+- first version of the package
