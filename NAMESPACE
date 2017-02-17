@@ -1,5 +1,6 @@
 export("add.tree.matrix")
 export("block.bootstrap")
+export("fl.b.b")
 export("get.matrix")
 export("nst.b")
 export("nst.p_inventory")
