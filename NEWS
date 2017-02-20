@@ -1,6 +1,15 @@
 NEWS
 ----
 
+* 2017-XX-XX: Version 0.1-3 [unreleased]
+
+- bugfixes and streamlining based on the Workshop in Santiago 14.2.-17.2.
+- removed the single stage method from this (multi-stage) package
+
+* 2017-02-17: Version 0.1-2
+
+- added a scenario merging forward tree generation method
+
 * 2016-11-14: Version 0.1-1 
 
 - added preliminary version of single-stage scenario reduction

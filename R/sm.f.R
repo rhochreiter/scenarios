@@ -1,4 +1,4 @@
-scm.f <- function(simulation, tree_structure) {
+sm.f <- function(simulation, tree_structure) {
   
   ### preprocessing
   m <- get.matrix(simulation, root=FALSE)
@@ -13,27 +13,25 @@ scm.f <- function(simulation, tree_structure) {
   tree.value <- c(simulation$original[length(simulation$original)])
   tree.pred <- c(-1)
   tree.stages <- c(0)
-  tree.stageprob <- c(1)
-  tree.prob <- c(1)
+  tree.p_stage <- c(1)
+  tree.p_node <- c(1)
   
-  # tree stages
+  # predefine vector of stages of all nodes in the tree 
   current_stage <- 1
   for(nas in nodes_at_stage[2:length(nodes_at_stage)]) {
     tree.stages <- c(tree.stages, rep(current_stage, nas)) 
     current_stage <-   current_stage + 1
   }
 
-  # tree pred
+  # predefine vector of predecessors of all nodes in the tree
   preds <- c()
   for(current_node in 1:nodes_without_terminal) {
     node_stage <- tree.stages[current_node]
-#    for(i in 1:tree_structure_complete[node_stage+1]) {
-      preds <- c(preds, rep(current_node-1, tree_structure_complete[node_stage+2]))
-#    }
+    preds <- c(preds, rep(current_node-1, tree_structure_complete[node_stage+2]))
   }
   tree.pred <- c(tree.pred, preds)
   
-  #
+  # tree generation
   positions <- list(c(1:n_simulations))
   for(current_node in 1:nodes_without_terminal) {
     node_stage <- tree.stages[current_node]
@@ -42,30 +40,15 @@ scm.f <- function(simulation, tree_structure) {
     data <- as.vector(m[current_positions, node_stage+1])
     reduction <- tree_structure_complete[node_stage+2]
 
-    approximation <- node.approx.fixed(data, reduction)
+    approximation <- node.approx(data, reduction, fixed=TRUE)
     tree.value <- c(tree.value, approximation$value)
-    weights <- c()
     for(p in approximation$position) {
-      weights <- c(weights, length(p))
       original.positions <- current_positions[p]
       positions[[length(positions)+1]] <- original.positions
     }
-    prob <- weights/sum(weights)
-    tree.prob <- c(tree.prob, prob)
+    tree.p_node <- c(tree.p_node, approximation$prob)
   }
 
-  ### postprocessing
-  
-  # build tree object
-  scenario.tree <- list()
-  scenario.tree$value <- tree.value
-  scenario.tree$predecessor <- tree.pred
-  scenario.tree$stage <- tree.stages
-  scenario.tree$nodeprob <- tree.prob
-  # scenario.tree$stageprob <- tree.stageprob
-  scenario.tree$nodes <- length(tree.value)
-  scenario.tree$stages <- max(tree.stages) + 1
-  class(scenario.tree) <- "scenario.tree"
-  
-  return(scenario.tree)
+  # return scenario tree 
+  return(scenario.tree(tree.value, tree.pred, tree.stages, p.node=tree.p_node))
 }

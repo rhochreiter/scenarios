@@ -1,22 +1,18 @@
-block.bootstrap <- function(series, simulations, n) {
+block.bootstrap <- function(input, n_timesteps=1, n_scenarios=100) {
+  
   # choose position of resampled period
-  resampling_positions <- round(runif(n, min=1, max=length(returns)-simulations))
+  resampling_positions <- round(runif(n_scenarios, min=1, 
+                                      max=length(input)-n_timesteps))
   
   # create scenario set
-  for(i in 1:n) {
-    sims <- series[resampling_positions[i]:(resampling_positions[i]+simulations)]
-    if (i==1) { scenario_set <- sims } else {
-      scenario_set <- rbind(scenario_set, sims)
+  for(i in 1:n_scenarios) {
+    sims <- input[resampling_positions[i]:(resampling_positions[i]+n_timesteps-1)]
+    if (i==1) { simulations <- sims } else {
+      simulations <- rbind(simulations, sims)
     }
   }
+  row.names(simulations) <- NULL
   
-  # create simulation object
-  simulation <- list()  
-  simulation$original <- series
-  simulation$simulation <- scenario_set
-  simulation$n <- n
-  class(simulation) <- "scenario.simulation"
-  
-  # return scenario set  
-  return(simulation)
+  # return scenario simulation object  
+  return(scenario.simulation(input, simulations))
 }
